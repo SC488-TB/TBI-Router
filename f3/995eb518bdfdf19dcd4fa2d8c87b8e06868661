@@ -1,0 +1,175 @@
+app/cost/prices.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-29
+app/quality/gate.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-58
+.env.example
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-25
+docs/adr/0001-decision-layer-not-a-chatbot.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-30
+docs/adr/0002-rules-first-classifier.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-30
+docs/plans/06-named-source-miss.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-76
+app/schemas.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-130
+docs/adr/0007-hackathon-stack.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-30
+pyproject.toml
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-25
+docs/adr/0006-cost-baseline-without-premium-call.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-35
+app/classifier/counted.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-60
+app/routes/premium.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-23
+app/ui/static/app.js
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-365
+app/tools/fixtures.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-26
+ide/README.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-18
+docs/architecture/request-flow-diagram.html
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-245
+docs/adr/0003-five-routes-cheapest-first.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-36
+docs/architecture/README.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-118
+docs/adr/0010-counted-margin-not-a-fitted-model.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-59
+app/eval/fixtures/policies.json
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-14
+docs/architecture/confluence-request-path.svg
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-56
+app/quality/meaning.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-45
+app/classifier/rules.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-97
+app/classifier/service.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-135
+app/classifier/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+ide/package.json
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-55
+docs/adr/0008-optional-mid-tier-and-retrieval-stub.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-29
+ide/extension.js
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-97
+app/db.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-84
+app/orchestrator.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-629
+app/routes/mid.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-38
+app/cost/savings.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-42
+app/factory.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-32
+app/router/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+app/textutil.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-85
+docs/adr/0005-semantic-cache-cheap-intents.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-31
+app/eval/prompts.jsonl
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-40
+app/routes/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+app/ui/static/app.css
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-263
+ide/panel.js
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-63
+docs/plans/01-implementation-plan.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-566
+docs/plans/05-tool-router.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-150
+docs/adr/0004-quality-gate-escalate-once.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-31
+app/eval/fixtures/jira.json
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-14
+app/ui/templates/index.html
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-145
+app/eval/replay.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-86
+app/tools/atlassian.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-78
+app/tools/router.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-51
+app/main.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-89
+app/routes/cheap.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-25
+docs/adr/0012-tool-router-names-the-source.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-36
+app/router/policy.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-27
+app/cost/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+app/classifier/fallback.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-44
+app/cost/logger.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-151
+docs/adr/0011-ide-command-calls-the-router.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-32
+app/eval/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+app/tools/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+tests/conftest.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-46
+app/gateway.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-198
+docs/adr/0009-role-list-gaps.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-59
+docs/architecture/tool-router-diagram.html
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-158
+.gitignore
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-12
+docs/adr/README.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-22
+app/quality/__init__.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1
+app/config.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-90
+app/router/service.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-20
+docs/plans/00-solution-writeup.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-134
+docs/plans/03-lite-ml-signals.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-67
+docs/architecture/tbi-router-diagram.html
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-269
+docs/README.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-23
+app/eval/fixtures/confluence.json
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-9
+app/eval/note.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-53
+app/routes/cache.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-99
+tests/test_router.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-445
+docs/plans/04-counted-score-implementation.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-183
+app/eval/fixtures/notion.json
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-9
+docs/plans/02-quality-vs-cost.md
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-22
+app/routes/retrieval.py
+  s_a1fad45916af65::t_e5b4f73e0ac418 1-68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f3995eb518bdfdf19dcd4fa2d8c87b8e06868661",
+  "prompts": {},
+  "sessions": {
+    "s_a1fad45916af65": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c08b19ab-4af3-4537-8a77-92d19cc7e51f",
+        "model": "unknown"
+      },
+      "human_author": "SC488-TB <sc488@tmw.com>"
+    }
+  }
+}
