@@ -1,0 +1,25 @@
+[project]
+name = "tbi-router"
+version = "0.1.0"
+description = "Decision layer that routes each job to the cheapest capable model."
+requires-python = ">=3.9"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "pydantic>=2.6",
+  "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "httpx>=0.27"]
+gateway = ["litellm>=1.50"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["ui/templates/*.html", "ui/static/*", "eval/prompts.jsonl", "eval/fixtures/*.json"]

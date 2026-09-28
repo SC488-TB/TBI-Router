@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBI Tool Router Diagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --line: #71717a;
+    --neutral-fill: #f4f4f5;
+    --neutral-stroke: #a1a1aa;
+    --group-stroke: #d4d4d8;
+    --cheap-fill: #e8f5ec;
+    --cheap-stroke: #2f8f5b;
+    --prem-fill: #f5e6f0;
+    --prem-stroke: #8e2a6b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111113;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --line: #a1a1aa;
+      --neutral-fill: #1f1f23;
+      --neutral-stroke: #71717a;
+      --group-stroke: #3f3f46;
+      --cheap-fill: #14301f;
+      --cheap-stroke: #4fbf84;
+      --prem-fill: #33152a;
+      --prem-stroke: #d66bb0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --line: #a1a1aa;
+    --neutral-fill: #1f1f23;
+    --neutral-stroke: #71717a;
+    --group-stroke: #3f3f46;
+    --cheap-fill: #14301f;
+    --cheap-stroke: #4fbf84;
+    --prem-fill: #33152a;
+    --prem-stroke: #d66bb0;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  body { padding: 16px; box-sizing: border-box; }
+  svg { display: block; width: 100%; max-width: 1280px; height: auto; margin: 0 auto; }
+  svg text { font-family: Inter, system-ui, -apple-system, sans-serif; fill: var(--text); }
+  .title    { font-size: 20px; font-weight: 600; }
+  .subtitle { font-size: 13px; fill: var(--muted); }
+  .t        { font-size: 14px; font-weight: 600; }
+  .d        { font-size: 12px; font-weight: 400; fill: var(--muted); }
+  .lbl      { font-size: 12px; fill: var(--muted); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+  .grp-lbl  { font-size: 12px; font-weight: 600; fill: var(--muted); letter-spacing: .02em; }
+  .node rect { stroke-width: 1.5; }
+  .neutral rect { fill: var(--neutral-fill); stroke: var(--neutral-stroke); }
+  .cheap rect   { fill: var(--cheap-fill);   stroke: var(--cheap-stroke); }
+  .prem rect    { fill: var(--prem-fill);    stroke: var(--prem-stroke); }
+  .group { fill: none; stroke: var(--group-stroke); stroke-width: 1.5; stroke-dasharray: 2 4; }
+  .ln  { fill: none; stroke: var(--line); stroke-width: 1.5; }
+  .skip { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .arr { fill: var(--line); }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Tool router names one source, fetches that fixture, then the existing classifier and model router see the document text.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="arr" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="40" y="40">Tool router: name the source, then classify the document</text>
+  <text class="subtitle" x="40" y="66">The tool router does not pick a model. The classifier does not name a source. MCP is not on this path.</text>
+
+  <!-- connectors -->
+  <path class="ln" d="M232,168 H280" marker-end="url(#arr)"/>
+  <path class="ln" d="M488,168 H536" marker-end="url(#arr)"/>
+  <path class="ln" d="M792,168 H840" marker-end="url(#arr)"/>
+  <path class="ln" d="M1048,168 H1096" marker-end="url(#arr)"/>
+
+  <!-- miss / two sources skip the fetch -->
+  <path class="skip" d="M384,216 V300 H944" marker-end="url(#arr)"/>
+  <text class="lbl" x="560" y="292">none, or two sources: classify the original prompt</text>
+
+  <!-- nodes -->
+  <g class="node neutral">
+    <rect x="40" y="120" width="192" height="96" rx="8"/>
+    <text class="t" x="56" y="148">Prompt</text>
+    <text class="d" x="56" y="172">summarize the ticket</text>
+    <text class="d" x="56" y="188">JIRA-1234</text>
+  </g>
+
+  <g class="node neutral">
+    <rect x="280" y="120" width="208" height="96" rx="8"/>
+    <text class="t" x="296" y="148">Tool router</text>
+    <text class="d" x="296" y="172">jira, confluence, notion,</text>
+    <text class="d" x="296" y="188">or none. Does not fetch.</text>
+  </g>
+
+  <g class="node cheap">
+    <rect x="536" y="120" width="256" height="96" rx="8"/>
+    <text class="t" x="552" y="148">One fixture</text>
+    <text class="d" x="552" y="172">jira.json, confluence.json,</text>
+    <text class="d" x="552" y="188">or notion.json. One read.</text>
+  </g>
+
+  <g class="node neutral">
+    <rect x="840" y="120" width="208" height="96" rx="8"/>
+    <text class="t" x="856" y="148">Classifier</text>
+    <text class="d" x="856" y="172">sees the document,</text>
+    <text class="d" x="856" y="188">not the user's sentence</text>
+  </g>
+
+  <g class="node prem">
+    <rect x="1096" y="120" width="144" height="96" rx="8"/>
+    <text class="t" x="1112" y="148">Model router</text>
+    <text class="d" x="1112" y="172">existing five</text>
+    <text class="d" x="1112" y="188">routes</text>
+  </g>
+
+  <rect class="group" x="40" y="360" width="1200" height="220" rx="12"/>
+  <text class="grp-lbl" x="56" y="388">NOT ON THIS PATH</text>
+
+  <g class="node neutral">
+    <rect x="64" y="416" width="360" height="120" rx="8"/>
+    <text class="t" x="80" y="448">MCP wrapper</text>
+    <text class="d" x="80" y="472">May sit in front of the same clients</text>
+    <text class="d" x="80" y="488">for some other agent. The router does</text>
+    <text class="d" x="80" y="504">not call it during classify.</text>
+  </g>
+
+  <g class="node neutral">
+    <rect x="460" y="416" width="360" height="120" rx="8"/>
+    <text class="t" x="476" y="448">policies.json</text>
+    <text class="d" x="476" y="472">PTO and TICKET-123 still go through</text>
+    <text class="d" x="476" y="488">Retriever.lookup(). A hit skips the</text>
+    <text class="d" x="476" y="504">model. ADR 0008 stays.</text>
+  </g>
+
+  <g class="node neutral">
+    <rect x="856" y="416" width="360" height="120" rx="8"/>
+    <text class="t" x="872" y="448">Live tokens</text>
+    <text class="d" x="872" y="472">JIRA_API_TOKEN and the other two</text>
+    <text class="d" x="872" y="488">live in the environment. Fixtures</text>
+    <text class="d" x="872" y="504">do not read them.</text>
+  </g>
+</svg>
+</body>
+</html>

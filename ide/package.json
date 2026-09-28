@@ -1,0 +1,55 @@
+{
+  "name": "tbi-router-ide",
+  "displayName": "TBI Router",
+  "description": "Send the selection to the TBI Router. The router picks the model.",
+  "version": "0.1.1",
+  "publisher": "tbi",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tbi.routeSelection",
+        "title": "TBI: Route selection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "tbi.routeSelection",
+          "when": "editorHasSelection",
+          "group": "navigation@20"
+        }
+      ]
+    },
+    "chatParticipants": [
+      {
+        "id": "tbi.router",
+        "name": "tbi",
+        "fullName": "TBI Router",
+        "description": "Route this message. Does not use the chat model.",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "route",
+            "description": "Post this message to the TBI Router"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "TBI Router",
+      "properties": {
+        "tbi.routerUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8766",
+          "description": "TBI Router base URL. The command posts to POST /route."
+        }
+      }
+    }
+  }
+}

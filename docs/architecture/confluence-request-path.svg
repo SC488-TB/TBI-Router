@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" fill="#ffffff"/>
+  <style>
+    .box { fill: #f4f7fb; stroke: #1f3a5f; stroke-width: 2; }
+    .stop { fill: #fdecec; stroke: #9b2c2c; stroke-width: 2; }
+    .premium { fill: #eef6ea; stroke: #2f6b3a; stroke-width: 2; }
+    .title { font: 600 28px Arial, Helvetica, sans-serif; fill: #172033; }
+    .label { font: 600 18px Arial, Helvetica, sans-serif; fill: #172033; }
+    .small { font: 14px Arial, Helvetica, sans-serif; fill: #334155; }
+    .edge { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <text x="48" y="48" class="title">TBI Router request path</text>
+  <rect x="470" y="80" width="250" height="64" rx="8" class="box"/>
+  <text x="595" y="118" text-anchor="middle" class="label">Prompt</text>
+  <rect x="470" y="190" width="250" height="72" rx="8" class="box"/>
+  <text x="595" y="222" text-anchor="middle" class="label">Named document?</text>
+  <text x="595" y="244" text-anchor="middle" class="small">one key or one page link</text>
+  <rect x="120" y="330" width="250" height="72" rx="8" class="box"/>
+  <text x="245" y="362" text-anchor="middle" class="label">Read body</text>
+  <text x="245" y="384" text-anchor="middle" class="small">model sees the body</text>
+  <rect x="860" y="330" width="280" height="72" rx="8" class="stop"/>
+  <text x="1000" y="362" text-anchor="middle" class="label">Stop. No model call</text>
+  <text x="1000" y="384" text-anchor="middle" class="small">Document was not found</text>
+  <rect x="470" y="460" width="250" height="64" rx="8" class="box"/>
+  <text x="595" y="498" text-anchor="middle" class="label">Classify the job</text>
+  <rect x="470" y="570" width="250" height="64" rx="8" class="box"/>
+  <text x="595" y="608" text-anchor="middle" class="label">Pick one route</text>
+  <rect x="80" y="680" width="220" height="52" rx="8" class="box"/>
+  <text x="190" y="712" text-anchor="middle" class="label">Quality gate</text>
+  <rect x="390" y="680" width="250" height="52" rx="8" class="premium"/>
+  <text x="515" y="712" text-anchor="middle" class="label">Premium, once</text>
+  <rect x="730" y="680" width="220" height="52" rx="8" class="box"/>
+  <text x="840" y="712" text-anchor="middle" class="label">Show answer</text>
+  <rect x="1020" y="680" width="180" height="52" rx="8" class="box"/>
+  <text x="1110" y="712" text-anchor="middle" class="label">Cost log</text>
+  <path d="M595 144 V190" class="edge"/>
+  <path d="M520 262 C430 290 320 300 245 330" class="edge"/>
+  <path d="M670 262 C760 290 900 300 1000 330" class="edge"/>
+  <path d="M245 402 C360 430 500 440 560 460" class="edge"/>
+  <path d="M720 226 H900 V430" class="edge"/>
+  <path d="M595 524 V570" class="edge"/>
+  <path d="M520 634 C360 650 240 660 190 680" class="edge"/>
+  <path d="M670 634 C760 650 820 660 840 680" class="edge"/>
+  <path d="M190 680 V652 H300 V680" class="edge"/>
+  <text x="250" y="292" class="small">one source</text>
+  <text x="790" y="292" class="small">no body</text>
+  <text x="760" y="214" class="small">no source</text>
+  <text x="300" y="668" class="small">low-cost, fail</text>
+  <text x="150" y="668" class="small">low-cost</text>
+  <text x="760" y="668" class="small">premium or mid</text>
+</svg>

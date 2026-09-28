@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBI Router request flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --line: #71717a;
+    --neutral-fill: #f4f4f5;
+    --neutral-stroke: #a1a1aa;
+    --group-stroke: #d4d4d8;
+    --cheap-fill: #e8f5ec;
+    --cheap-stroke: #2f8f5b;
+    --prem-fill: #f5e6f0;
+    --prem-stroke: #8e2a6b;
+    --miss-fill: #f8efe6;
+    --miss-stroke: #b45309;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111113;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --line: #a1a1aa;
+      --neutral-fill: #1f1f23;
+      --neutral-stroke: #71717a;
+      --group-stroke: #3f3f46;
+      --cheap-fill: #14301f;
+      --cheap-stroke: #4fbf84;
+      --prem-fill: #33152a;
+      --prem-stroke: #d66bb0;
+      --miss-fill: #3a2412;
+      --miss-stroke: #f0a35e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --line: #a1a1aa;
+    --neutral-fill: #1f1f23;
+    --neutral-stroke: #71717a;
+    --group-stroke: #3f3f46;
+    --cheap-fill: #14301f;
+    --cheap-stroke: #4fbf84;
+    --prem-fill: #33152a;
+    --prem-stroke: #d66bb0;
+    --miss-fill: #3a2412;
+    --miss-stroke: #f0a35e;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  body { padding: 16px; box-sizing: border-box; }
+  svg { display: block; width: 100%; max-width: 1280px; height: auto; margin: 0 auto; }
+  svg text { font-family: Inter, system-ui, -apple-system, sans-serif; fill: var(--text); }
+  .title    { font-size: 20px; font-weight: 600; }
+  .subtitle { font-size: 13px; fill: var(--muted); }
+  .t        { font-size: 14px; font-weight: 600; }
+  .d        { font-size: 12px; font-weight: 400; fill: var(--muted); }
+  .lbl      { font-size: 12px; fill: var(--muted); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+  .grp-lbl  { font-size: 12px; font-weight: 600; fill: var(--muted); letter-spacing: .02em; }
+  .node rect { stroke-width: 1.5; }
+  .neutral rect { fill: var(--neutral-fill); stroke: var(--neutral-stroke); }
+  .cheap rect   { fill: var(--cheap-fill);   stroke: var(--cheap-stroke); }
+  .prem rect    { fill: var(--prem-fill);    stroke: var(--prem-stroke); }
+  .miss rect    { fill: var(--miss-fill);    stroke: var(--miss-stroke); }
+  .group { fill: none; stroke: var(--group-stroke); stroke-width: 1.5; stroke-dasharray: 2 4; }
+  .ln  { fill: none; stroke: var(--line); stroke-width: 1.5; }
+  .skip { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .arr { fill: var(--line); }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1280 980" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Request flow. The tool router names a source. A body is classified. A named miss stops before the model.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="arr" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="40" y="40">Request flow: name the source, then route the text</text>
+  <text class="subtitle" x="40" y="66">POST /route. Tool router first. Model router second. A named miss does not call a model.</text>
+
+  <!-- row 1 -->
+  <path class="ln" d="M220,150 H268" marker-end="url(#arr)"/>
+  <path class="ln" d="M476,150 H524" marker-end="url(#arr)"/>
+  <path class="ln" d="M732,150 H780" marker-end="url(#arr)"/>
+  <path class="ln" d="M988,150 H1036" marker-end="url(#arr)"/>
+
+  <g class="node neutral">
+    <rect x="40" y="104" width="180" height="92" rx="8"/>
+    <text class="t" x="56" y="132">Paste</text>
+    <text class="d" x="56" y="156">POST /route</text>
+    <text class="d" x="56" y="172">app/main.py</text>
+  </g>
+  <g class="node neutral">
+    <rect x="268" y="104" width="208" height="92" rx="8"/>
+    <text class="t" x="284" y="132">Orchestrator</text>
+    <text class="d" x="284" y="156">route()</text>
+    <text class="d" x="284" y="172">app/orchestrator.py</text>
+  </g>
+  <g class="node neutral">
+    <rect x="524" y="104" width="208" height="92" rx="8"/>
+    <text class="t" x="540" y="132">Tool router</text>
+    <text class="d" x="540" y="156">names a source</text>
+    <text class="d" x="540" y="172">does not fetch</text>
+  </g>
+  <g class="node cheap">
+    <rect x="780" y="104" width="208" height="92" rx="8"/>
+    <text class="t" x="796" y="132">One id?</text>
+    <text class="d" x="796" y="156">Jira key or browse URL</text>
+    <text class="d" x="796" y="172">wiki link or notion.so</text>
+  </g>
+  <g class="node miss">
+    <rect x="1036" y="104" width="204" height="92" rx="8"/>
+    <text class="t" x="1052" y="132">Two sources</text>
+    <text class="d" x="1052" y="156">Name one source.</text>
+    <text class="d" x="1052" y="172">call neither</text>
+  </g>
+
+  <!-- row 2: fetch -->
+  <path class="ln" d="M884,196 V248 H676" marker-end="url(#arr)"/>
+  <text class="lbl" x="700" y="240">one id</text>
+  <path class="ln" d="M628,292 H676" marker-end="url(#arr)"/>
+  <path class="skip" d="M524,292 H476" marker-end="url(#arr)"/>
+  <text class="lbl" x="488" y="284">hit</text>
+  <path class="ln" d="M884,292 H932" marker-end="url(#arr)"/>
+  <text class="lbl" x="892" y="284">miss</text>
+
+  <g class="node cheap">
+    <rect x="524" y="248" width="208" height="92" rx="8"/>
+    <text class="t" x="540" y="276">Fixture</text>
+    <text class="d" x="540" y="300">read_fixture</text>
+    <text class="d" x="540" y="316">JIRA-1234, page 9000000042</text>
+  </g>
+  <g class="node cheap">
+    <rect x="780" y="248" width="208" height="92" rx="8"/>
+    <text class="t" x="796" y="276">Atlassian</text>
+    <text class="d" x="796" y="300">one REST read</text>
+    <text class="d" x="796" y="316">only if 3 env values set</text>
+  </g>
+  <g class="node miss">
+    <rect x="1036" y="248" width="204" height="92" rx="8"/>
+    <text class="t" x="1052" y="276">Named miss</text>
+    <text class="d" x="1052" y="300">Document was not found.</text>
+    <text class="d" x="1052" y="316">stop. model=none</text>
+  </g>
+
+  <!-- row 3: classify -->
+  <path class="ln" d="M420,384 H268" marker-end="url(#arr)"/>
+  <text class="lbl" x="300" y="376">no tool</text>
+  <path class="ln" d="M628,340 V384 H268" marker-end="url(#arr)"/>
+  <text class="lbl" x="430" y="376">body, not the URL</text>
+  <path class="skip" d="M1138,340 V430 H476" marker-end="url(#arr)"/>
+  <text class="lbl" x="760" y="422">planned stop. today this still classifies</text>
+
+  <g class="node neutral">
+    <rect x="40" y="392" width="228" height="92" rx="8"/>
+    <text class="t" x="56" y="420">Classifier</text>
+    <text class="d" x="56" y="444">rules, then counted score</text>
+    <text class="d" x="56" y="460">label model only if unsure</text>
+  </g>
+  <g class="node prem">
+    <rect x="316" y="392" width="208" height="92" rx="8"/>
+    <text class="t" x="332" y="420">Model router</text>
+    <text class="d" x="332" y="444">intent to one route</text>
+    <text class="d" x="332" y="460">does not call a model</text>
+  </g>
+  <g class="node neutral">
+    <rect x="572" y="392" width="228" height="92" rx="8"/>
+    <text class="t" x="588" y="420">Generate</text>
+    <text class="d" x="588" y="444">cache, cheap, retrieval,</text>
+    <text class="d" x="588" y="460">mid, or premium</text>
+  </g>
+  <g class="node cheap">
+    <rect x="848" y="392" width="188" height="92" rx="8"/>
+    <text class="t" x="864" y="420">Quality gate</text>
+    <text class="d" x="864" y="444">cheap paths only</text>
+    <text class="d" x="864" y="460">fail escalates once</text>
+  </g>
+  <g class="node neutral">
+    <rect x="1084" y="392" width="156" height="92" rx="8"/>
+    <text class="t" x="1100" y="420">Answer</text>
+    <text class="d" x="1100" y="444">cost log</text>
+    <text class="d" x="1100" y="460">savings pair</text>
+  </g>
+
+  <path class="ln" d="M268,438 H316" marker-end="url(#arr)"/>
+  <path class="ln" d="M524,438 H572" marker-end="url(#arr)"/>
+  <path class="ln" d="M800,438 H848" marker-end="url(#arr)"/>
+  <path class="ln" d="M1036,438 H1084" marker-end="url(#arr)"/>
+  <path class="skip" d="M942,484 V536 H1162" marker-end="url(#arr)"/>
+  <text class="lbl" x="980" y="528">premium and mid skip the gate</text>
+
+  <!-- evaluation -->
+  <rect class="group" x="40" y="580" width="1200" height="360" rx="12"/>
+  <text class="grp-lbl" x="56" y="608">EVALUATION OF WHAT IS RUNNING</text>
+
+  <g class="node cheap">
+    <rect x="64" y="632" width="360" height="120" rx="8"/>
+    <text class="t" x="80" y="664">Works</text>
+    <text class="d" x="80" y="688">Jira key and browse URL fetch live.</text>
+    <text class="d" x="80" y="704">Confluence wiki link fetches live.</text>
+    <text class="d" x="80" y="720">Fixture hit still skips Atlassian.</text>
+  </g>
+  <g class="node miss">
+    <rect x="460" y="632" width="360" height="120" rx="8"/>
+    <text class="t" x="476" y="664">Still open</text>
+    <text class="d" x="476" y="688">A named miss still classifies the URL.</text>
+    <text class="d" x="476" y="704">That can call a model and escalate.</text>
+    <text class="d" x="476" y="720">Plan 06 stops that before classify.</text>
+  </g>
+  <g class="node neutral">
+    <rect x="856" y="632" width="360" height="120" rx="8"/>
+    <text class="t" x="872" y="664">Not a selector</text>
+    <text class="d" x="872" y="688">The word confluence or notion</text>
+    <text class="d" x="872" y="704">does not name a page. A link does.</text>
+    <text class="d" x="872" y="720">CONF-42 and NOTION-7 are not ids.</text>
+  </g>
+  <g class="node neutral">
+    <rect x="64" y="776" width="560" height="128" rx="8"/>
+    <text class="t" x="80" y="808">Stays off this path</text>
+    <text class="d" x="80" y="832">MCP is not called. ADR 0009 still rejects a second provider.</text>
+    <text class="d" x="80" y="848">PTO still reads policies.json through Retriever.lookup().</text>
+    <text class="d" x="80" y="864">Tokens stay in .env. source=jira only after a body exists.</text>
+    <text class="d" x="80" y="880">Notion has no live client. A Notion miss cannot call Atlassian.</text>
+  </g>
+  <g class="node prem">
+    <rect x="656" y="776" width="560" height="128" rx="8"/>
+    <text class="t" x="672" y="808">What the model sees</text>
+    <text class="d" x="672" y="832">A fetched body is summarize, unless the body is code.</text>
+    <text class="d" x="672" y="848">Code is premium. Cheap text can fail the gate once.</text>
+    <text class="d" x="672" y="864">The savings pair is still the first number on the page.</text>
+    <text class="d" x="672" y="880">A fixture hit never spends the Atlassian token.</text>
+  </g>
+</svg>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": "JIRA-1234",
+      "title": "Hotel wifi drops the VPN",
+      "body": "JIRA-1234 is waiting on the network team. The VPN drops after 10 minutes on hotel wifi. Workaround: split tunnel off, then reconnect. Updated 2026-09-20."
+    },
+    {
+      "id": "JIRA-9999",
+      "title": "Auth helper throws on refresh",
+      "body": "def refresh_token(session):\n    if session.expired:\n        raise TokenError(session.user_id)\n    return session.token\n"
+    }
+  ]
+}

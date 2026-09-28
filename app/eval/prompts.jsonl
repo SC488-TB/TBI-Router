@@ -1,0 +1,40 @@
+{"id": "p01", "source": "slack", "intent": "summarize", "prompt": "Summarize these notes: the launch slipped to 2026-10-03 because the billing cert expired. We lost 42 minutes. Owner is Priya. Next step is a dry run on 2026-09-28."}
+{"id": "p02", "source": "slack", "intent": "summarize", "prompt": "tl;dr the thread: design review approved the cache, rejected a custom classifier, and asked for a savings number by Friday."}
+{"id": "p03", "source": "docs", "intent": "summarize", "prompt": "Make this shorter: The team spent three days on a gateway we do not need. LiteLLM already retries. We should spend the time on the labeled prompt set instead."}
+{"id": "p04", "source": "email", "intent": "email_rewrite", "prompt": "Rewrite this email: hey team the vpn thing is still broken, can someone look before the 2026-09-30 demo, thanks"}
+{"id": "p05", "source": "email", "intent": "email_rewrite", "prompt": "Draft a reply that sounds more professional: sorry I missed the review, I can send the write-up by 2026-09-26."}
+{"id": "p06", "source": "slack", "intent": "rephrase", "prompt": "Rephrase: we should not send every summary to the premium model just because the button is there."}
+{"id": "p07", "source": "docs", "intent": "rephrase", "prompt": "Say this differently: cache hits still have to pass the quality gate, or a bad answer gets stuck."}
+{"id": "p08", "source": "email", "intent": "grammar", "prompt": "Fix grammar: the router don't replace Copilot, it sit in front of the cheap work."}
+{"id": "p09", "source": "docs", "intent": "grammar", "prompt": "Proofread: their is 40 to 60 prompts in the set and each one need a hand label."}
+{"id": "p10", "source": "jira", "intent": "lookup", "prompt": "What's the status of TICKET-123?"}
+{"id": "p11", "source": "docs", "intent": "lookup", "prompt": "What does the PTO policy say about rollover days?"}
+{"id": "p12", "source": "docs", "intent": "lookup", "prompt": "What does the VPN access policy say about personal devices?"}
+{"id": "p13", "source": "ide", "intent": "code", "looks_like_code": true, "prompt": "Write a function that computes Jaccard overlap for two token sets."}
+{"id": "p14", "source": "ide", "intent": "code", "looks_like_code": true, "prompt": "Refactor this function so the baseline cost is computed in one place."}
+{"id": "p15", "source": "ide", "intent": "code", "prompt": "Debug this stack trace: TypeError: 'NoneType' object has no attribute 'intent'."}
+{"id": "p16", "source": "ide", "intent": "code", "prompt": "Summarize this function and then refactor it: def route(prompt): return premium(prompt)"}
+{"id": "p17", "source": "slack", "intent": "reasoning", "prompt": "Compare these options: rules-first classifier versus training a small model this week. What should we do?"}
+{"id": "p18", "source": "slack", "intent": "reasoning", "prompt": "Why did the savings number go negative on the escalated email?"}
+{"id": "p19", "source": "slack", "intent": "ambiguous", "prompt": "thoughts?"}
+{"id": "p20", "source": "email", "intent": "email_rewrite", "prompt": "Rewrite this email: the $1,800 stipend was approved on 2026-08-02, please send receipts to finance@example.com."}
+{"id": "p21", "source": "slack", "intent": "summarize", "prompt": "Bullet these notes: on-call responds in 15 minutes, handoff notes are required, comp day is 1 day per weekend shift."}
+{"id": "p22", "source": "docs", "intent": "lookup", "prompt": "Where do I find the travel policy hotel cap?"}
+{"id": "p23", "source": "ide", "intent": "code", "prompt": "Implement a retry loop around the gateway with one retry on 429."}
+{"id": "p24", "source": "slack", "intent": "grammar", "prompt": "Clean this up: we was going to escalate twice but the flag have to be set before the call."}
+{"id": "p25", "source": "email", "intent": "email_rewrite", "prompt": "Draft a reply: I can review the write-up on 2026-09-26 and send comments the same day."}
+{"id": "p26", "source": "slack", "intent": "summarize", "prompt": "Key points from the retro: cache hits still pass the quality gate, and a bad answer is deleted before it sticks."}
+{"id": "p27", "source": "docs", "intent": "lookup", "prompt": "What does the expense policy say about meals under $75?"}
+{"id": "p28", "source": "slack", "intent": "rephrase", "prompt": "Paraphrase: most non-code traffic should stay off the premium model this week."}
+{"id": "p29", "source": "ide", "intent": "code", "prompt": "Write a unit test that asserts a cache hit costs zero dollars."}
+{"id": "p30", "source": "slack", "intent": "reasoning", "prompt": "What should we do if the cheap model returns an empty summary?"}
+{"id": "p31", "source": "docs", "intent": "grammar", "prompt": "Proofread: the savings view have to show always premium versus routed before the table."}
+{"id": "p32", "source": "email", "intent": "email_rewrite", "prompt": "Rewrite this email: can you confirm the hotel cap is $250 per night before I book the 2026-10-03 trip."}
+{"id": "p33", "source": "slack", "intent": "summarize", "prompt": "Make this shorter: We replay the labeled set on Friday. Accuracy is measured by the script, not by eye. One honest miss that escalated is part of the demo."}
+{"id": "p34", "source": "jira", "intent": "lookup", "prompt": "What's the status of TICKET-789?"}
+{"id": "p35", "source": "slack", "intent": "ambiguous", "prompt": "ok"}
+{"id": "p36", "source": "ide", "intent": "code", "looks_like_code": true, "prompt": "Debug this stack trace: AttributeError: 'CostEvent' object has no attribute 'saved'."}
+{"id": "p37", "source": "docs", "intent": "rephrase", "prompt": "Say this differently: never escalate twice, even if the premium answer is imperfect."}
+{"id": "p38", "source": "slack", "intent": "grammar", "prompt": "Fix grammar: the router don't call premium just to measure the baseline."}
+{"id": "p39", "source": "email", "intent": "email_rewrite", "prompt": "Draft an email: the dry run is on 2026-09-28, please send the checklist by noon."}
+{"id": "p40", "source": "docs", "intent": "lookup", "prompt": "Where do I find the on-call policy response time?"}

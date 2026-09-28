@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBI Router Diagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #18181b;
+    --muted: #52525b;
+    --line: #71717a;
+    --neutral-fill: #f4f4f5;
+    --neutral-stroke: #a1a1aa;
+    --group-stroke: #d4d4d8;
+    --cheap-fill: #e8f5ec;
+    --cheap-stroke: #2f8f5b;
+    --mid-fill: #fdf3dc;
+    --mid-stroke: #b7791f;
+    --prem-fill: #f5e6f0;
+    --prem-stroke: #8e2a6b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111113;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --line: #a1a1aa;
+      --neutral-fill: #1f1f23;
+      --neutral-stroke: #71717a;
+      --group-stroke: #3f3f46;
+      --cheap-fill: #14301f;
+      --cheap-stroke: #4fbf84;
+      --mid-fill: #33280f;
+      --mid-stroke: #e0a53a;
+      --prem-fill: #33152a;
+      --prem-stroke: #d66bb0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --line: #a1a1aa;
+    --neutral-fill: #1f1f23;
+    --neutral-stroke: #71717a;
+    --group-stroke: #3f3f46;
+    --cheap-fill: #14301f;
+    --cheap-stroke: #4fbf84;
+    --mid-fill: #33280f;
+    --mid-stroke: #e0a53a;
+    --prem-fill: #33152a;
+    --prem-stroke: #d66bb0;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  body { padding: 16px; box-sizing: border-box; }
+  svg { display: block; width: 100%; max-width: 1528px; height: auto; margin: 0 auto; }
+  svg text { font-family: Inter, system-ui, -apple-system, sans-serif; fill: var(--text); }
+
+  .title    { font-size: 20px; font-weight: 600; }
+  .subtitle { font-size: 13px; fill: var(--muted); }
+  .t        { font-size: 14px; font-weight: 600; }
+  .d        { font-size: 12px; font-weight: 400; fill: var(--muted); }
+  .tag      { font-size: 12px; font-weight: 600; text-anchor: end; }
+  .lbl      { font-size: 12px; fill: var(--muted); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+  .grp-lbl  { font-size: 12px; font-weight: 600; fill: var(--muted); letter-spacing: .02em; }
+
+  .node rect { stroke-width: 1.5; }
+  .neutral rect { fill: var(--neutral-fill); stroke: var(--neutral-stroke); }
+  .cheap rect   { fill: var(--cheap-fill);   stroke: var(--cheap-stroke); }
+  .mid rect     { fill: var(--mid-fill);     stroke: var(--mid-stroke); }
+  .prem rect    { fill: var(--prem-fill);    stroke: var(--prem-stroke); }
+  .cheap .tag { fill: var(--cheap-stroke); }
+  .mid .tag   { fill: var(--mid-stroke); }
+  .prem .tag  { fill: var(--prem-stroke); }
+
+  .group { fill: none; stroke: var(--group-stroke); stroke-width: 1.5; stroke-dasharray: 2 4; }
+
+  .ln   { fill: none; stroke: var(--line); stroke-width: 1.5; }
+  .esc  { fill: none; stroke: var(--prem-stroke); stroke-width: 1.5; stroke-dasharray: 6 4; }
+  .arr      { fill: var(--line); }
+  .arr-prem { fill: var(--prem-stroke); }
+  .dot  { fill: var(--prem-stroke); }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1528 880" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="TBI Router request flow: request, classifier, router fanning out to five cost-tiered paths, quality gate with escalation to premium, and a cost logger feeding a savings view.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="arr" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+    <marker id="arr-prem" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="arr-prem" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <!-- Title + legend -->
+  <text class="title" x="40" y="40">TBI Router: route each job to the cheapest capable model</text>
+  <text class="subtitle" x="40" y="66">Classify the job, route it to the cheapest capable model, cache the repeats, measure the savings, and escalate only when quality is not good enough.</text>
+
+  <g id="legend">
+    <text class="d" x="1080" y="36">Cost tier</text>
+    <g class="node cheap"><rect x="1144" y="26" width="16" height="12" rx="3"/></g>
+    <text class="d" x="1168" y="36">Cheap</text>
+    <g class="node mid"><rect x="1232" y="26" width="16" height="12" rx="3"/></g>
+    <text class="d" x="1256" y="36">Mid-tier</text>
+    <g class="node prem"><rect x="1328" y="26" width="16" height="12" rx="3"/></g>
+    <text class="d" x="1352" y="36">Premium</text>
+  </g>
+
+  <!-- ===== Connectors (drawn first so boxes sit on top) ===== -->
+
+  <!-- Main flow -->
+  <path class="ln" d="M232,416 H280" marker-end="url(#arr)"/>
+  <path class="ln" d="M488,416 H536" marker-end="url(#arr)"/>
+
+  <!-- Router fan-out bus -->
+  <path class="ln" d="M664,416 H688 V176 H720" marker-end="url(#arr)"/>
+  <path class="ln" d="M664,416 H688 V296 H720" marker-end="url(#arr)"/>
+  <path class="ln" d="M664,416 H720" marker-end="url(#arr)"/>
+  <path class="ln" d="M664,416 H688 V536 H720" marker-end="url(#arr)"/>
+  <path class="ln" d="M664,416 H688 V656 H720" marker-end="url(#arr)"/>
+
+  <!-- Cheap paths merge into the quality gate -->
+  <path class="ln" d="M992,176 H1032 V296 H1056" marker-end="url(#arr)"/>
+  <path class="ln" d="M992,296 H1056" marker-end="url(#arr)"/>
+  <path class="ln" d="M992,416 H1032 V296 H1056" marker-end="url(#arr)"/>
+
+  <!-- Gate pass -> answer -->
+  <path class="ln" d="M1264,296 H1312" marker-end="url(#arr)"/>
+  <text class="lbl" x="1288" y="286" text-anchor="middle">pass</text>
+
+  <!-- Escalate once: gate -> premium -->
+  <path class="esc" d="M1160,352 V656 H992" marker-end="url(#arr-prem)"/>
+  <text class="lbl" x="1170" y="500">fail → escalate once</text>
+
+  <!-- Try the smart model: button -> premium (joins escalate track) -->
+  <path class="esc" d="M1400,432 V656 H1160"/>
+  <circle class="dot" cx="1160" cy="656" r="3.5"/>
+  <text class="lbl" x="1390" y="560" text-anchor="end">user override</text>
+
+  <!-- Every call logs -->
+  <path class="ln" d="M856,720 V760" marker-end="url(#arr)"/>
+  <text class="lbl" x="866" y="744">every call logs</text>
+
+  <!-- Logger -> savings -->
+  <path class="ln" d="M1232,800 H1280" marker-end="url(#arr)"/>
+
+  <!-- ===== Nodes ===== -->
+
+  <!-- 1. Request -->
+  <g class="node neutral">
+    <rect x="40" y="368" width="192" height="96" rx="8"/>
+    <text class="t" x="56" y="396">Request</text>
+    <text class="d" x="56" y="416">prompt + context:</text>
+    <text class="d" x="56" y="432">source, looks-like-code,</text>
+    <text class="d" x="56" y="448">length</text>
+  </g>
+
+  <!-- 2. Classifier -->
+  <g class="node neutral">
+    <rect x="280" y="368" width="208" height="96" rx="8"/>
+    <text class="t" x="296" y="396">Classifier</text>
+    <text class="d" x="296" y="416">rules / keywords first</text>
+    <text class="d" x="296" y="432">→ small-model fallback</text>
+    <text class="d" x="296" y="448">when unsure</text>
+  </g>
+
+  <!-- 3. Router -->
+  <g class="node neutral">
+    <rect x="536" y="384" width="128" height="64" rx="8"/>
+    <text class="t" x="552" y="412">Router</text>
+    <text class="d" x="552" y="432">fans out to 5</text>
+  </g>
+
+  <!-- Paths group -->
+  <rect class="group" x="704" y="104" width="304" height="616" rx="12"/>
+  <text class="grp-lbl" x="720" y="126">ROUTES · CHEAPEST FIRST</text>
+
+  <!-- 3a. Semantic cache -->
+  <g class="node cheap">
+    <rect x="720" y="136" width="272" height="80" rx="8"/>
+    <text class="t" x="736" y="164">Semantic cache</text>
+    <text class="tag" x="976" y="164">~$0</text>
+    <text class="d" x="736" y="184">near-duplicate hit →</text>
+    <text class="d" x="736" y="200">return cached answer</text>
+  </g>
+
+  <!-- 3b. Cheap model -->
+  <g class="node cheap">
+    <rect x="720" y="256" width="272" height="80" rx="8"/>
+    <text class="t" x="736" y="284">Cheap model</text>
+    <text class="tag" x="976" y="284">$</text>
+    <text class="d" x="736" y="304">summarize, rephrase,</text>
+    <text class="d" x="736" y="320">grammar, email drafts</text>
+  </g>
+
+  <!-- 3c. Retrieval first -->
+  <g class="node cheap">
+    <rect x="720" y="376" width="272" height="80" rx="8"/>
+    <text class="t" x="736" y="404">Retrieval first</text>
+    <text class="tag" x="976" y="404">$</text>
+    <text class="d" x="736" y="424">ticket / policy lookups;</text>
+    <text class="d" x="736" y="440">call a model only if needed</text>
+  </g>
+
+  <!-- 3d. Mid-tier model -->
+  <g class="node mid">
+    <rect x="720" y="496" width="272" height="80" rx="8"/>
+    <text class="t" x="736" y="524">Mid-tier model</text>
+    <text class="tag" x="976" y="524">$$</text>
+    <text class="d" x="736" y="544">real reasoning,</text>
+    <text class="d" x="736" y="560">ambiguous requests</text>
+  </g>
+
+  <!-- 3e. Premium model -->
+  <g class="node prem">
+    <rect x="720" y="616" width="272" height="80" rx="8"/>
+    <text class="t" x="736" y="644">Premium model</text>
+    <text class="tag" x="976" y="644">$$$</text>
+    <text class="d" x="736" y="664">code, refactors,</text>
+    <text class="d" x="736" y="680">multi-file edits, architecture</text>
+  </g>
+
+  <!-- 4. Quality gate -->
+  <g class="node neutral">
+    <rect x="1056" y="240" width="208" height="112" rx="8"/>
+    <text class="t" x="1072" y="268">Quality gate</text>
+    <text class="d" x="1072" y="288">not empty, not truncated</text>
+    <text class="d" x="1072" y="304">not a refusal</text>
+    <text class="d" x="1072" y="320">meaning preserved</text>
+    <text class="d" x="1072" y="336">(cheap-path answers only)</text>
+  </g>
+
+  <!-- Answer -->
+  <g class="node neutral">
+    <rect x="1312" y="272" width="176" height="48" rx="8"/>
+    <text class="t" x="1328" y="301">Answer to user</text>
+  </g>
+
+  <!-- 5. Try the smart model -->
+  <g class="node prem">
+    <rect x="1312" y="368" width="176" height="64" rx="8"/>
+    <text class="t" x="1328" y="396">Try the smart model</text>
+    <text class="d" x="1328" y="416">user clicks button</text>
+  </g>
+
+  <!-- 6. Cost logger -->
+  <g class="node neutral">
+    <rect x="40" y="760" width="1192" height="80" rx="8"/>
+    <text class="t" x="56" y="788">Cost logger</text>
+    <text class="d" x="56" y="808">intent · model · tokens · cost · cache hit/miss</text>
+    <text class="d" x="56" y="824">premium-baseline cost (what “always premium” would have spent)</text>
+  </g>
+
+  <!-- 7. Savings view -->
+  <g class="node cheap">
+    <rect x="1280" y="760" width="208" height="80" rx="8"/>
+    <text class="t" x="1296" y="788">Savings view</text>
+    <text class="d" x="1296" y="808">Always premium $X</text>
+    <text class="d" x="1296" y="824">vs routed $Y</text>
+  </g>
+</svg>
+</body>
+</html>

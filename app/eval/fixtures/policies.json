@@ -1,0 +1,14 @@
+{
+  "items": [
+    {"id": "TICKET-123", "title": "VPN timeout on hotel wifi", "body": "TICKET-123 is waiting on the network team. Workaround: split tunnel off, then reconnect. Updated 2026-09-12."},
+    {"id": "TICKET-456", "title": "Laptop stipend exception", "body": "TICKET-456 was approved for $1,800 on 2026-08-02. Receipts go to finance@example.com."},
+    {"id": "PTO", "title": "PTO policy", "body": "Full-time staff accrue 20 PTO days per year. Requests over 5 consecutive days need a manager note. Unused days up to 5 roll over."},
+    {"id": "VPN", "title": "VPN access policy", "body": "VPN is required off the office network. Personal devices are not approved. Access reviews happen every 90 days."},
+    {"id": "EXPENSE", "title": "Expense policy", "body": "Meals under $75 do not need a receipt. Client meals over $150 need a director. Submit within 30 days."},
+    {"id": "SEC-12", "title": "Incident reporting", "body": "Report suspected account compromise to security@example.com within 1 hour. Do not reset the password yourself if the mailbox is forwarding."},
+    {"id": "WFA", "title": "Work from anywhere", "body": "Up to 20 work-from-anywhere days per calendar year. Not valid in a country where the company has no entity."},
+    {"id": "ONCALL", "title": "On-call policy", "body": "Primary on-call responds within 15 minutes. Handoff notes are required. Comp day is 1 day per weekend shift."},
+    {"id": "TRAVEL", "title": "Travel policy", "body": "Book economy for flights under 6 hours. Hotels capped at $250 per night in the US. Book 14 days ahead when you can."},
+    {"id": "TICKET-789", "title": "SSO outage follow-up", "body": "TICKET-789 closed on 2026-07-19. Root cause was an expired signing cert. Customers saw errors for 42 minutes."}
+  ]
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TBI AI Router</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">TBI</span>
+    <div>
+      <h1>TBI AI Router</h1>
+      <p>Decision layer in front of models — not another chatbot</p>
+    </div>
+  </div>
+  <div class="controls">
+    <span class="pill on" id="mode-pill">Router on</span>
+    <button id="force" class="pill" type="button" aria-pressed="false">Force premium</button>
+    <button id="theme" class="icon" type="button" aria-label="Toggle theme">☀</button>
+  </div>
+</header>
+
+<main>
+  <section class="savings" aria-label="Savings this session">
+    <div class="pair">
+      <div>
+        <div class="k">Always premium · this demo</div>
+        <div class="v baseline" id="x">$0.0000</div>
+      </div>
+      <div class="vs">vs</div>
+      <div>
+        <div class="k">Routed (actual)</div>
+        <div class="v cheap" id="y">$0.0000</div>
+      </div>
+    </div>
+    <div class="saved-box">
+      <div class="pct" id="pct">0%</div>
+      <div class="k" id="saved-line">$0.0000 saved · 0 requests</div>
+    </div>
+    <p class="mix" id="mix">no routes yet</p>
+  </section>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Ask</h2>
+      <textarea id="prompt" placeholder="Paste a work prompt — summarize, lookup, rewrite, or code. The router picks the lowest-cost path."></textarea>
+      <dl class="facts score-facts" id="live-score" aria-live="polite">
+        <div><dt>Method</dt><dd id="score-method">—</dd></div>
+        <div><dt>Intent</dt><dd id="score-intent">—</dd></div>
+        <div><dt>Counted score</dt><dd id="score-value">—</dd></div>
+        <div><dt>Margin</dt><dd id="score-margin">—</dd></div>
+      </dl>
+      <p class="hint" id="score-note">Type a prompt. This score does not call a model.</p>
+      <div class="chips" role="group" aria-label="Demo prompts">
+        <button type="button" class="chip" data-kind="summarize">Summarize notes → low-cost</button>
+        <button type="button" class="chip" data-kind="cache">Same notes again → cache</button>
+        <button type="button" class="chip" data-kind="ticket">TICKET-123 → retrieval</button>
+        <button type="button" class="chip" data-kind="code">Refactor function → premium</button>
+        <button type="button" class="chip" data-kind="counted">Exec skim → counted</button>
+      </div>
+      <div class="actions">
+        <button id="replay" class="ghost" type="button">Replay eval set</button>
+        <button id="go" type="button">Submit</button>
+      </div>
+      <p class="err" id="error" role="alert"></p>
+    </section>
+
+    <section class="panel">
+      <h2>How it routes</h2>
+      <ol class="flow" id="flow">
+        <li data-step="request">Request</li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li data-step="classifier">Classifier</li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li data-step="router">Router</li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li data-step="path">Lowest-cost first</li>
+      </ol>
+      <ul class="routes" id="routes">
+        <li data-route="cache"><span class="dot cache"></span><span>Semantic cache</span><b>~$0</b></li>
+        <li data-route="cheap"><span class="dot cheap"></span><span>Low-cost model</span><b>$</b></li>
+        <li data-route="retrieval"><span class="dot retrieval"></span><span>Retrieval first</span><b>$</b></li>
+        <li data-route="mid"><span class="dot mid"></span><span>Mid-tier</span><b>$$</b></li>
+        <li data-route="premium"><span class="dot premium"></span><span>Premium</span><b>$$$</b></li>
+      </ul>
+      <p class="hint">Quality gate on low-cost paths · escalate once to premium on fail</p>
+    </section>
+
+    <section class="panel answer-panel" id="answer-wrap">
+      <div id="empty-answer">
+        <h3>Answer appears here</h3>
+        <p>You'll see the route badge, cost, and latency — try a demo prompt above.</p>
+      </div>
+      <div id="ready-answer" hidden>
+        <div class="answer-head">
+          <span class="tag" id="badge">low-cost</span>
+          <span class="meta" id="meta"></span>
+          <p class="decision" id="decision"></p>
+        </div>
+        <dl class="facts" id="facts">
+          <div><dt>Model</dt><dd id="fact-model">—</dd></div>
+          <div><dt>This call</dt><dd id="fact-cost">—</dd></div>
+          <div><dt>Always premium</dt><dd id="fact-base">—</dd></div>
+          <div><dt>Latency</dt><dd id="fact-latency">—</dd></div>
+          <div><dt>Counted score</dt><dd id="fact-score">—</dd></div>
+          <div><dt>Margin</dt><dd id="fact-margin">—</dd></div>
+          <div><dt>Overlap</dt><dd id="fact-overlap">—</dd></div>
+          <div><dt>Why</dt><dd id="fact-why">—</dd></div>
+        </dl>
+        <h3 class="out-label">Model output</h3>
+        <div id="answer"></div>
+        <p class="notice" id="notice"></p>
+        <button id="escalate" class="prem" type="button" hidden>Try the smart model</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Live activity</h2>
+      <ul class="activity" id="activity">
+        <li class="empty">No requests yet. Paste a prompt or replay the eval set.</li>
+      </ul>
+    </section>
+  </div>
+
+  <details class="log">
+    <summary>Request log</summary>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th><th>Intent</th><th>Route</th><th>Model</th>
+          <th>Cache</th><th>Escalated</th><th>Cost</th><th>Baseline</th><th>Saved</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td class="empty" colspan="9">No requests yet. Paste a prompt or replay the eval set.</td></tr>
+      </tbody>
+    </table>
+  </details>
+  <p class="foot">Hackathon demo · rules-first routing · stub gateway until TBI_GATEWAY=litellm</p>
+</main>
+<script src="/static/app.js?v=13"></script>
+</body>
+</html>
