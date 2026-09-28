@@ -1,0 +1,19 @@
+README.md
+  s_a1fad45916af65::t_89d6f20b1d41bd 1-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9e232ab4651da91c43c913da85d082850e954b46",
+  "prompts": {},
+  "sessions": {
+    "s_a1fad45916af65": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c08b19ab-4af3-4537-8a77-92d19cc7e51f",
+        "model": "unknown"
+      },
+      "human_author": "SC488-TB <sc488@tmw.com>"
+    }
+  }
+}
