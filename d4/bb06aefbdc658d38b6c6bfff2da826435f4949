@@ -1,0 +1,29 @@
+app/classifier/counted.py
+  s_a1fad45916af65::t_fd252a16fac92a 1-60
+app/eval/fixtures/confluence.json
+  s_a1fad45916af65::t_2a1187590b9571 1-9
+app/eval/replay.py
+  s_a1fad45916af65::t_ce4b20d12f03e0 1-86
+app/quality/gate.py
+  s_a1fad45916af65::t_d61117210169cb 1-58
+app/tools/atlassian.py
+  s_a1fad45916af65::t_d7a989e8bc7b46 1-78
+docs/plans/02-quality-vs-cost.md
+  s_a1fad45916af65::t_4514af416cb54c 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d4bb06aefbdc658d38b6c6bfff2da826435f4949",
+  "prompts": {},
+  "sessions": {
+    "s_a1fad45916af65": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "c08b19ab-4af3-4537-8a77-92d19cc7e51f",
+        "model": "unknown"
+      },
+      "human_author": "SC488-TB <sc488@tmw.com>"
+    }
+  }
+}
